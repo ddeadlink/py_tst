@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type=text/javascript src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-lg-offset-4">
+          <h3 class="header-row">View <span class="label label-default">{{arg}}</span></h3>
+        </div>
+        <div class="col-lg-2">
+          <h3 class="header-row"><a href="/" class="btn btn-default" role="button">Back</a></h3>
+        </div>
+      </div>
+    </div>
+    <div class="container position-view">
+
+      {% if arg == 'user' %}
+
+      {% for one in res%}
+      <ul class="list-group">
+        <li class="list-group-item">name: {{ one.name }}</li>
+        <div class="info">
+
+          <li class="list-group-item">surname:  {{ one.surname }}</li>
+
+          <li class="list-group-item">position: {{ one.position }}</li>
+
+          <li class="list-group-item">mail: {{ one.mail }}</li>
+
+          <li class="list-group-item">phone: {{ one.phone }}</li>
+
+          <li class="list-group-item">birth: {{ one.birth }}</li>
+
+        </div>
+        <li class="btn btn-default control-btn" role="button">Update</li>
+        <li class="btn btn-default control-btn view" role="button">Full info</li>
+        <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-trigger='{{ arg }}'>Delete</li>
+      </ul>
+      {% endfor %}
+
+      {% elif arg == 'position' %}
+
+        {% for one in res%}
+        <ul class="list-group">
+          <li class="list-group-item">name: {{ one.name }}</li>
+          <div class="info">
+
+            <li class="list-group-item">description: {{ one.description }}</li>
+
+          </div>
+          <li class="btn btn-default control-btn" role="button">Update</li>
+          <li class="btn btn-default control-btn view" role="button">Full info</li>
+          <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-trigger='{{ arg }}'>Delete</li>
+        </ul>
+        {% endfor %}
+
+      {% elif arg == 'department' %}
+
+
+      {% endif %}
+    <div>
+  </body>
+</html>

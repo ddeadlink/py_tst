@@ -1,0 +1,53 @@
+.position{
+  padding: 10%;
+}
+
+.form-wrap{
+  width: 480px;
+}
+
+.header-row{
+  text-align: center;
+}
+
+.label{
+  font-size: 100%;
+}
+
+.control-l{
+  float: left;
+}
+
+
+.control-r{
+  float: right;
+}
+
+.lbl{
+  padding-left: 10px;
+}
+
+.position-view{
+    padding: 0 15% 0 15%;
+}
+
+.slct{
+  padding-bottom: 10px;
+}
+
+.list-pos{
+  text-align: center;
+  cursor: pointer;
+}
+
+.control-btn{
+  margin-top: 5px;
+}
+
+.info{
+  display: none
+}
+
+.show{
+  display:block;
+}
