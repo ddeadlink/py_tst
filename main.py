@@ -4,48 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:connect565@localhost/test_task'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://osfqbysgftyykd:g6VxXCxQoi7trxPTkmMfgtv_x2@ec2-54-75-232-54.eu-west-1.compute.amazonaws.com/dbpb9v07deo1nu'
-
-
 db = SQLAlchemy(app)
 
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=False)
-    surname = db.Column(db.String(80), unique=False)
-    position = db.Column(db.String(80), unique=False)
-    mail = db.Column(db.String(80), unique=True)
-    phone = db.Column(db.Integer, unique=True)
-    birth = db.Column(db.Integer, unique=False)
-
-    def __init__(self, name, surname, position, mail, phone, birth):
-        self.name = name
-        self.surname = surname
-        self.position = position
-        self.mail = mail
-        self.phone = phone
-        self.birth = birth
-
-
-class Profile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=False)
-    description = db.Column(db.String(80), unique=False)
-
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
-
-
-class Department(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=False)
-    head = db.Column(db.String(80), unique=False)
-    description = db.Column(db.String(80), unique=False)
-
-    def __init__(self, name, head, description):
-        self.name = name
-        self.head = head
-        self.description = description
+from models import *
 
 @app.route('/')
 def index():
@@ -60,24 +21,29 @@ def view(arg):
         res = Profile.query.all()
     return render_template('view.html', res = res, arg = arg)
 
+# create tpl for all components
 @app.route('/create/<arg>')
 def create(arg):
     positions = Profile.query.all()
-    return render_template('create_new.html', arg = arg, positions = positions)
+    departments = Department.query.all()
+    return render_template('create_new.html', arg = arg, positions = positions, departments = departments)
 
+# to post data to db
 @app.route('/post/<arg>',methods=['POST'])
 def post(arg):
     if arg == 'user':
-        user = Users(request.form['name'],request.form['surname'],request.form['position'],request.form['mail'],request.form['phone'],request.form['birth'])
+        user = Users(request.form['name'],request.form['surname'],request.form['position'],\
+                request.form['department'],request.form['mail'],request.form['phone'],request.form['birth'])
         db.session.add(user)
         db.session.commit()
+
     elif arg == 'position':
         position = Profile(request.form['name'],request.form['description'])
         db.session.add(position)
         db.session.commit()
-
     return redirect(url_for('index'))
 
+# ajax handler to delete components
 @app.route('/ajax', methods=['POST'])
 def ajax():
     if str(request.form['key']) == 'user':
