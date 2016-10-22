@@ -1,6 +1,6 @@
 $(function() {
 
-
+  // delete 
     $('.delete').map(function(key, element){
       $(element).click(function(){
 
@@ -16,7 +16,7 @@ $(function() {
       })
     });
 
-
+    // full info
     $('.view').map(function(key, element){
       $(element).click(function(){
         $($('.info-block')[key]).toggleClass('show');
