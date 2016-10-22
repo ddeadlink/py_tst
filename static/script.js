@@ -19,7 +19,7 @@ $(function() {
 
     $('.view').map(function(key, element){
       $(element).click(function(){
-        $($('.info')[key]).toggleClass('show');
+        $($('.info-block')[key]).toggleClass('show');
       })
     })
 
