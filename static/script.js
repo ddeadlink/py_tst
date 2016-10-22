@@ -23,18 +23,4 @@ $(function() {
       })
     })
 
-/*
-    if ( $('#position option:selected').text() == '' ){
-       $('#position').attr('disabled','disabled');
-       $('.form-group button').attr('disabled','disabled');
-       $('#position').append('<option>create position first</option>')
-
-    }
-
-    if ( $('#department option:selected').text() == '' ){
-       $('#department').attr('disabled','disabled');
-       $('.form-group button').attr('disabled','disabled');
-       $('#department').append('<option>create department first</option>');
-    }
-*/
 });

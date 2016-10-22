@@ -4,7 +4,7 @@ class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=False)
     surname = db.Column(db.String(80), unique=False)
-    department = db.Column(db.Integer, unique=False)
+    department = db.Column(db.String(80), unique=False)
     position = db.Column(db.String(80), unique=False)
     mail = db.Column(db.String(80), unique=True)
     phone = db.Column(db.Integer, unique=True)
