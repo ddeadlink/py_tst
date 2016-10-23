@@ -48,7 +48,9 @@ def post(arg):
 
     elif arg == 'department':
         department = Department(request.form['name'],request.form['parent'],request.form['head'],request.form['description'])
-        
+        db.session.add(department)
+        db.session.commit()
+
     return redirect(url_for('index'))
 
 @app.route('/update/<arg>/<int:id>')
