@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>update</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script type=text/javascript src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-lg-offset-4">
+          <h3 class="header-row">Update <span class="label label-default">{{arg}}</span></h3>
+        </div>
+        <div class="col-lg-2">
+          <h3 class="header-row"><a href="/view/{{arg}}" class="btn btn-default" role="button">Back</a></h3>
+        </div>
+      </div>
+    </div>
+  {% if arg == 'user' %}
+  <form class="form-horizontal" method="POST" action="/post_update/user/{{one.id}}">
+    <div class="container form-wrap">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">name:</label>
+      <div class="col-sm-10">
+        <input required type="text" class="form-control" name='name' id="name" value="{{one.name}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="surname">surname:</label>
+      <div class="col-sm-10">
+        <input required type="text" class="form-control"  name='surname' id="surname" value="{{one.surname}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2 lbl" for="department">department:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="department" name='department'>
+          <option selected value="{{one.department}}">{{one.department}}</option>
+          {% for d in departments %}
+            <option value={{ d.id }}>{{ d.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="Position">position:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="position" name='position'>
+          <option selected value="{{one.position}}">{{one.position}}</option>
+          {% for p in positions %}
+            <option>{{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label required class="control-label col-sm-2" for="mail">mail:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" name='mail' id="mail" value="{{one.mail}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label required class="control-label col-sm-2" for="pwd">phone:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" name='phone' id="phone" value="{{one.phone}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label required class="control-label col-sm-2" for="pwd">birth:</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" name='birth' id="birth" value="{{one.birth}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default control">update {{arg}}</button>
+      </div>
+    </div>
+  </div>
+  </form>
+  {% elif arg == 'position' %}
+  <form class="form-horizontal" method="POST" action="/post_update/position/{{positions.id}}">
+    <div class="container form-wrap">
+    <div class="form-group">
+      <label  class="control-label col-sm-2 lbl" for="name">name:</label>
+      <div class="col-sm-10">
+        <input required type="text" class="form-control" name='name' id="name" value="{{positions.name}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2 lbl" for="description">description:</label>
+      <div class="col-sm-10">
+        <input required type="text" class="form-control"  name='description' id="description" value="{{positions.description}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default control">update {{arg}}</button>
+      </div>
+    </div>
+  </div>
+  </form>
+  {% else %}
+  <form class="form-horizontal" method="POST" action="/post_update/department">
+    <div class="container form-wrap">
+    <div class="form-group">
+      <label class="control-label col-sm-2 lbl" for="name">name:</label>
+      <div class="col-sm-10">
+        <input required type="text" class="form-control" name='name' id="name" placeholder="Enter name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2 lbl" for="parent">parent department:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="department" name='department'>
+          <option selected></option>
+          {% for p in departments %}
+            <option>{{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2 lbl" for="name">head:</label>
+      <div class="col-sm-10">
+        <select class="form-control" id="department" name='department'>
+          <option selected></option>
+          {% for p in users %}
+            <option>{{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2 lbl" for="description">description:</label>
+      <div class="col-sm-10">
+        <input required type="text" class="form-control"  name='description' id="description" placeholder="Enter description">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default control">Add position</button>
+      </div>
+    </div>
+  </div>
+  </form>
+  {% endif %}
+  </div>
+
+
+
+
+  </body>
+</html>

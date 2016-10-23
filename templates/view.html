@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Main</title>
+    <title>view</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -10,6 +10,7 @@
     <script type=text/javascript src="{{ url_for('static', filename='script.js') }}"></script>
   </head>
   <body>
+
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-lg-offset-4">
@@ -26,21 +27,24 @@
 
       {% for one in res%}
       <ul class="list-group">
-        <li class="list-group-item">name: {{ one.name }}</li>
+        <li class="list-group-item">name: <span class="name-view">{{ one.name }}</span></li>
+
         <div class="info-block">
 
-          <li class="list-group-item">surname:  {{ one.surname }}</li>
+          <li class="list-group-item">surname: <span class="surname-view"> {{ one.surname }}<span></li>
 
-          <li class="list-group-item">position: {{ one.position }}</li>
+          <li class="list-group-item">position:<span class="position-view"> {{ one.position }}</span></li>
 
-          <li class="list-group-item">mail: {{ one.mail }}</li>
+          <li class="list-group-item">department: <span class="department-view">{{ one.department }}</span></li>
 
-          <li class="list-group-item">phone: {{ one.phone }}</li>
+          <li class="list-group-item">mail: <span class="main-view">{{ one.mail }}</span></li>
 
-          <li class="list-group-item">birth: {{ one.birth }}</li>
+          <li class="list-group-item">phone: <span class="phone-view">{{ one.phone }}</span></li>
+
+          <li class="list-group-item">birth: <span class="birth-view">{{ one.birth }}</span></li>
 
         </div>
-        <li class="btn btn-default control-btn" role="button">Update</li>
+        <a href="/update/{{arg}}/{{ one.id }}" class="btn btn-default control-btn" role="button">Update</a>
         <li class="btn btn-default control-btn view" role="button">Full info</li>
         <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-trigger='{{ arg }}'>Delete</li>
       </ul>
@@ -56,7 +60,7 @@
             <li class="list-group-item">description: {{ one.description }}</li>
 
           </div>
-          <li class="btn btn-default control-btn" role="button">Update</li>
+          <a href="/update/{{arg}}/{{ one.id }}" class="btn btn-default control-btn" role="button">Update</a>
           <li class="btn btn-default control-btn view" role="button">Full info</li>
           <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-trigger='{{ arg }}'>Delete</li>
         </ul>
@@ -64,6 +68,25 @@
 
       {% elif arg == 'department' %}
 
+        {% for one in res%}
+
+      <ul class="list-group">
+        <li class="list-group-item">name: {{ one.name }}</li>
+        <div class="info-block">
+
+          <li class="list-group-item">parent: {{ one.description }}</li>
+
+          <li class="list-group-item">head: {{ one.description }}</li>
+
+          <li class="list-group-item">description: {{ one.description }}</li>
+
+          </div>
+            <a href="/update/{{arg}}/{{ one.id }}" class="btn btn-default control-btn" role="button">Update</a>
+            <li class="btn btn-default control-btn view" role="button">Full info</li>
+            <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-trigger='{{ arg }}'>Delete</li>
+        </ul>
+
+        {% endfor %}
 
       {% endif %}
     <div>

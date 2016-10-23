@@ -29,6 +29,14 @@ class Profile(db.Model):
         self.name = name
         self.description = description
 
+class DepMain(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_dep = db.Column(db.Integer, unique=False)
+    id_main = db.Column(db.Integer, unique=False)
+
+    def __init__(self, id_dep, id_main):
+        self.id_dep = id_dep
+        self.id_main = id_main
 
 class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,7 +45,7 @@ class Department(db.Model):
     parent = db.Column(db.Integer, unique=False)
     description = db.Column(db.String(80), unique=False)
 
-    def __init__(self, name, head, description):
+    def __init__(self, name, head, parent, description):
         self.name = name
         self.head = head
         self.parent = parent

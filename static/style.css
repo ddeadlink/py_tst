@@ -6,6 +6,16 @@
   width: 480px;
 }
 
+.form-wrap-view{
+  width: 480px;
+  display: none;
+  padding: 10px;
+}
+
+.update-confirm{
+  margin-top: 10px;
+}
+
 .header-row{
   text-align: center;
 }
@@ -45,7 +55,7 @@
 }
 
 .info-block{
-  display: none
+  display: none;
 }
 
 .show{
