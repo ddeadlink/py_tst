@@ -9,8 +9,9 @@ class Users(db.Model):
     mail = db.Column(db.String(80), unique=True)
     phone = db.Column(db.Integer, unique=True)
     birth = db.Column(db.Integer, unique=False)
+    master = db.Column(db.Integer, unique=False)
 
-    def __init__(self, name, surname, position, department, mail, phone, birth):
+    def __init__(self, name, surname, position, department, mail, phone, birth, master):
         self.name = name
         self.surname = surname
         self.position = position
@@ -18,6 +19,7 @@ class Users(db.Model):
         self.mail = mail
         self.phone = phone
         self.birth = birth
+        self.master = master
 
 
 class Profile(db.Model):

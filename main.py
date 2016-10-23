@@ -29,8 +29,9 @@ def create(arg):
     positions = Profile.query.all()
     # query departments with no master
     departments = Department.query.filter_by(head=str('')).all()
-    users = Users.query.filter_by(head=str('')).all()
-    return render_template('create_new.html', arg = arg, positions = positions, users = users, departments = departments)
+
+    users = Users.query.filter_by( name != 'some' ).all()
+    return render_template('create.html', arg = arg, positions = positions, users = users, departments = departments)
 
 # to post data to db
 @app.route('/post/<arg>',methods=['POST'])
@@ -47,7 +48,7 @@ def post(arg):
         db.session.commit()
 
     elif arg == 'department':
-        department = Department(request.form['name'],request.form['parent'],request.form['head'],request.form['description'])
+        department = Department(request.form['name'],request.form['head'],request.form['parent'],request.form['description'])
         db.session.add(department)
         db.session.commit()
 
