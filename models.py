@@ -42,7 +42,7 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=False)
     head = db.Column(db.String(80), unique=False)
-    parent = db.Column(db.Integer, unique=False)
+    parent = db.Column(db.String(80), unique=False)
     description = db.Column(db.String(80), unique=False)
 
     def __init__(self, name, head, parent, description):

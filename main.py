@@ -29,7 +29,7 @@ def create(arg):
     positions = Profile.query.all()
     # query departments with no master
     departments = Department.query.filter_by(head=str('')).all()
-    users = Users.query.all()
+    users = Users.query.filter_by(head=str('')).all()
     return render_template('create_new.html', arg = arg, positions = positions, users = users, departments = departments)
 
 # to post data to db
