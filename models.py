@@ -31,12 +31,12 @@ class Profile(db.Model):
 
 class DepMain(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_dep = db.Column(db.Integer, unique=False)
-    id_main = db.Column(db.Integer, unique=False)
+    dep = db.Column(db.Integer, unique=False)
+    main = db.Column(db.Integer, unique=False)
 
-    def __init__(self, id_dep, id_main):
-        self.id_dep = id_dep
-        self.id_main = id_main
+    def __init__(self, dep, main):
+        self.dep = dep
+        self.main = main
 
 class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
