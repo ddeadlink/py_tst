@@ -41,7 +41,7 @@
         <select class="form-control" id="department" name='department'>
           <option selected value="{{one.department}}">{{one.department}}</option>
           {% for d in departments %}
-            <option value={{ d.id }}>{{ d.name }}</option>
+            <option >{{ d.name }}</option>
           {% endfor %}
         </select>
       </div>
@@ -73,6 +73,7 @@
       <label required class="control-label col-sm-2" for="pwd">birth:</label>
       <div class="col-sm-10">
         <input type="number" class="form-control" name='birth' id="birth" value="{{one.birth}}">
+        <input type="number" class="hidden-data" name='master' id="master" value="{{one.master}}">
       </div>
     </div>
     <div class="form-group">
@@ -95,6 +96,7 @@
       <label class="control-label col-sm-2 lbl" for="description">description:</label>
       <div class="col-sm-10">
         <input required type="text" class="form-control"  name='description' id="description" value="{{positions.description}}">
+        <input type="text" class="hidden-data" name='filter' id="master" value="{{positions.name}}">
       </div>
     </div>
     <div class="form-group">
@@ -105,19 +107,19 @@
   </div>
   </form>
   {% else %}
-  <form class="form-horizontal" method="POST" action="/post_update/department">
+  <form class="form-horizontal" method="POST" action="/post_update/department/{{department.id}}">
     <div class="container form-wrap">
     <div class="form-group">
       <label class="control-label col-sm-2 lbl" for="name">name:</label>
       <div class="col-sm-10">
-        <input required type="text" class="form-control" name='name' id="name" placeholder="Enter name">
+        <input required type="text" class="form-control" name='name' id="name" value="{{department.name}}">
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-2 lbl" for="parent">parent department:</label>
       <div class="col-sm-10">
         <select class="form-control" id="department" name='department'>
-          <option selected></option>
+          <option selected value="{{department.parent}}">{{department.parent}}</option>
           {% for p in departments %}
             <option>{{ p.name }}</option>
           {% endfor %}
@@ -128,7 +130,7 @@
       <label class="control-label col-sm-2 lbl" for="name">head:</label>
       <div class="col-sm-10">
         <select class="form-control" id="department" name='department'>
-          <option selected></option>
+          <option selected value="{{department.head}}">{{department.head}}</option>
           {% for p in users %}
             <option>{{ p.name }}</option>
           {% endfor %}
@@ -138,12 +140,13 @@
     <div class="form-group">
       <label class="control-label col-sm-2 lbl" for="description">description:</label>
       <div class="col-sm-10">
-        <input required type="text" class="form-control"  name='description' id="description" placeholder="Enter description">
+        <input required type="text" class="form-control"  name='description' id="description" value="{{department.description}}">
+        <input type="text" class="hidden-data" name='filter' value="{{department.name}}">
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default control">Add position</button>
+        <button type="submit" class="btn btn-default control">update {{arg}}</button>
       </div>
     </div>
   </div>

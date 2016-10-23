@@ -16,6 +16,14 @@
   margin-top: 10px;
 }
 
+.hidden-data{
+  visibility: hidden;
+}
+
+.view-hidden{
+  padding: 10px;
+}
+
 .header-row{
   text-align: center;
 }

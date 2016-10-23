@@ -1,0 +1,13 @@
+<div class="container view-hidden">
+<div class="form-group">
+  <label class="control-label col-sm-2 lbl" for="name">change positions:</label>
+  <div class="col-sm-4">
+    <select class="form-control" id="positionChange" name='position'>
+      <option selected></option>
+      {% for p in positions %}
+        <option>{{ p.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+</div>

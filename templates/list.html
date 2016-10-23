@@ -1,0 +1,13 @@
+<div class="container view-hidden">
+<div class="form-group">
+  <label class="control-label col-sm-2 lbl" for="name">change master:</label>
+  <div class="col-sm-4">
+    <select class="form-control" id="masterChange" name='name'>
+      <option selected></option>
+      {% for p in users %}
+        <option>{{ p.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+</div>
