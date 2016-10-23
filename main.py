@@ -48,8 +48,7 @@ def post(arg):
 
     elif arg == 'department':
         department = Department(request.form['name'],request.form['parent'],request.form['head'],request.form['description'])
-        if request.form['head'] !== '':
-            res = Department.query.filter_by(name=str(request.form['head'])).first()
+        
     return redirect(url_for('index'))
 
 @app.route('/update/<arg>/<int:id>')
