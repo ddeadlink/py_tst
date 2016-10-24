@@ -31,15 +31,6 @@ class Profile(db.Model):
         self.name = name
         self.description = description
 
-class DepMain(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    dep = db.Column(db.String(80), unique=False)
-    main = db.Column(db.String(80), unique=False)
-
-    def __init__(self, dep, main):
-        self.dep = dep
-        self.main = main
-
 class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=False)

@@ -29,7 +29,7 @@ def view(arg):
 def create(arg):
     departments = Department.query.all()
     if arg == 'department':
-        users = Users.query.filter_by(master='0' ).all()
+        users = Users.query.filter_by(master=int(0)).all()
         return render_template('create.html', arg = arg, departments = departments, users = users)
     else:
         positions = Profile.query.all()
@@ -40,7 +40,7 @@ def create(arg):
 def post(arg):
     if arg == 'user':
         user = Users(request.form['name'],request.form['surname'],request.form['position'],\
-                request.form['department'],request.form['mail'],request.form['phone'],request.form['birth'],'0')
+                request.form['department'],request.form['mail'],request.form['phone'],request.form['birth'],0)
         db.session.add(user)
         db.session.commit()
 
@@ -51,10 +51,12 @@ def post(arg):
 
     elif arg == 'department':
         department = Department(request.form['name'],request.form['head'],request.form['parent'],request.form['description'])
+        if request.form['head'] != '':
+            departmentId = Department.query.filter_by(name=request.form['name']).first()
+            db.session.query(Users).filter(Users.name == request.form['head']).update({'department':request.form['name'],'master':departmentId.id})
+
         db.session.add(department)
         db.session.commit()
-        if request.form['head'] != '':
-            db.session.query(Users).filter(Users.name == request.form['head']).update({'master': str(department.id)})
 
     return redirect(url_for('index'))
 
@@ -64,7 +66,7 @@ def update(arg,id):
         user = Users.query.filter_by(id=id).first()
         positions = Profile.query.all()
         # query departments with no master
-        departments = Department.query.filter_by(head=str('')).all()
+        departments = Department.query.all()
         return render_template('update.html', arg = arg, positions = positions, departments = departments, one = user)
     if arg == 'position':
         positions = Profile.query.filter_by(id=id).first()
@@ -72,7 +74,7 @@ def update(arg,id):
     elif arg == 'department':
         department = Department.query.filter_by(id=id).first()
         departments = Department.query.filter(Department.id != id).all()
-        users = Users.query.filter_by(master='0' ).all()
+        users = Users.query.filter_by(master=0 ).all()
         return render_template('update.html', arg = arg, department = department,  users = users, departments = departments)
 
 
@@ -90,9 +92,10 @@ def ajaxDelete():
         db.session.commit()
     else:
         res = Department.query.filter_by(id=str(request.form['id'])).first()
+        db.session.query(Users).filter(Users.department==request.form['current']).update({'department': request.form['parent'],'master':0})
         db.session.delete(res)
         db.session.commit()
-    return str(res.name)
+    return str(request.form['parent'])
 
 @app.route('/ajaxDeleteUpdate', methods=['POST'])
 def ajaxDeleteUpdate():
@@ -103,10 +106,9 @@ def ajaxDeleteUpdate():
         db.session.commit()
     return str(user.id)
 
-
 @app.route('/ajaxGetMaster', methods=['POST'])
 def ajaxGetMaster():
-    users = Users.query.filter_by(master='0' ).all()
+    users = Users.query.filter_by(master=0 ).all()
     return render_template('list.html', users = users)
 
 @app.route('/ajaxGetPosition', methods=['POST'])
@@ -128,9 +130,10 @@ def post_update(arg,id):
         db.session.commit()
     elif arg == 'department':
         db.session.query(Department).filter(Department.id == id).update({'name': request.form['name'],'parent': request.form['parent'],\
-        'head': request.form['name'],'description': request.form['name']})
-        db.session.query(Users).filter(Users.department==request.form['filter']).update({'department': request.form['name']})
-
+        'head': request.form['head'],'description': request.form['description']})
+        db.session.query(Users).filter(Users.department==request.form['filter']).update({'department': request.form['name'],'master':id})
+        db.session.query(Users).filter(Users.name==request.form['head']).update({'department': request.form['name'],'master':id})
+        db.session.commit()
     return redirect(url_for('view',arg=arg))
 
 

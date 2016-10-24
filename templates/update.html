@@ -118,7 +118,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2 lbl" for="parent">parent department:</label>
       <div class="col-sm-10">
-        <select class="form-control" id="department" name='department'>
+        <select class="form-control" id="department" name='parent'>
           <option selected value="{{department.parent}}">{{department.parent}}</option>
           {% for p in departments %}
             <option>{{ p.name }}</option>
@@ -129,7 +129,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2 lbl" for="name">head:</label>
       <div class="col-sm-10">
-        <select class="form-control" id="department" name='department'>
+        <select class="form-control" id="department" name='head'>
           <option selected value="{{department.head}}">{{department.head}}</option>
           {% for p in users %}
             <option>{{ p.name }}</option>

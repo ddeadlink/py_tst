@@ -62,7 +62,7 @@
           </div>
           <a href="/update/{{arg}}/{{ one.id }}" class="btn btn-default control-btn" role="button">Update</a>
           <li class="btn btn-default control-btn view" role="button">Full info</li>
-          <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-name="{{ one.name }}" data-master='position' data-trigger='{{ arg }}'>Delete</li>
+          <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-name="{{ one.name }}" data-position='position' data-trigger='{{ arg }}'>Delete</li>
         </ul>
         {% endfor %}
 
@@ -71,7 +71,7 @@
         {% for one in res%}
 
       <ul class="list-group">
-        <li class="list-group-item">name: {{ one.name }}</li>
+        <li class="list-group-item" >name: <span class='dep-name'>{{ one.name }} </span></li>
         <div class="info-block">
 
           <li class="list-group-item">parent: {{ one.parent }}</li>
@@ -83,7 +83,7 @@
           </div>
             <a href="/update/{{arg}}/{{ one.id }}" class="btn btn-default control-btn" role="button">Update</a>
             <li class="btn btn-default control-btn view" role="button">Full info</li>
-            <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-trigger='{{ arg }}'>Delete</li>
+            <li class="btn btn-default control-btn delete" role="button" id='{{ one.id }}' data-department="{{one.parent}}" data-trigger='{{ arg }}'>Delete</li>
         </ul>
 
         {% endfor %}
