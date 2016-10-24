@@ -54,16 +54,21 @@ $(function() {
             }
           });
 
-        } else if ( $(element).attr('data-department') != '' && $(element).attr('data-department')){
+        } else if ( $(element).attr('data-department') != '' && $(element).attr('data-department') ){
+
+            console.log($(element).attr('data-department'), document.getElementsByClassName('dep-name')[key].innerHTML);
+
           $.ajax({
-            url: "/ajaxDelete",
+            url: "/ajaxDeleteDep",
             type: 'POST',
             data: {id:element.id,key: $(element).attr('data-trigger'),parent:$(element).attr('data-department'),
                   current:document.getElementsByClassName('dep-name')[key].innerHTML},
             success: function(result){
-              $(element).parents()[0].remove();
+              console.log(result);
+                $(element).parents()[0].remove();
             }
           });
+
         } else {
           $.ajax({
             url: "/ajaxDelete",

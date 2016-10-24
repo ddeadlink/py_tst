@@ -51,8 +51,10 @@ def post(arg):
 
     elif arg == 'department':
         department = Department(request.form['name'],request.form['head'],request.form['parent'],request.form['description'])
+        db.session.add(department)
+        db.session.commit()
+        departmentId = Department.query.filter_by(name=request.form['name']).first()
         if request.form['head'] != '':
-            departmentId = Department.query.filter_by(name=request.form['name']).first()
             db.session.query(Users).filter(Users.name == request.form['head']).update({'department':request.form['name'],'master':departmentId.id})
 
         db.session.add(department)
@@ -92,9 +94,18 @@ def ajaxDelete():
         db.session.commit()
     else:
         res = Department.query.filter_by(id=str(request.form['id'])).first()
-        db.session.query(Users).filter(Users.department==request.form['current']).update({'department': request.form['parent'],'master':0})
         db.session.delete(res)
         db.session.commit()
+
+    return str(request.form['key'])
+
+@app.route('/ajaxDeleteDep', methods=['POST'])
+def ajaxDeleteDep():
+    res = Department.query.filter_by(id=str(request.form['id'])).first()
+    db.session.query(Users).filter(Users.department==request.form['current'].strip()).update({'department': request.form['parent'],'master':int(0)})
+    db.session.delete(res)
+    db.session.commit()
+
     return str(request.form['parent'])
 
 @app.route('/ajaxDeleteUpdate', methods=['POST'])

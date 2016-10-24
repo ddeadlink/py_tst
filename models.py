@@ -7,7 +7,7 @@ class Users(db.Model):
     department = db.Column(db.String(80), unique=False)
     position = db.Column(db.String(80), unique=False)
     mail = db.Column(db.String(80), unique=True)
-    phone = db.Column(db.Integer, unique=True)
+    phone = db.Column(db.String(80), unique=True)
     birth = db.Column(db.Integer, unique=False)
     master = db.Column(db.Integer, unique=False)
 
